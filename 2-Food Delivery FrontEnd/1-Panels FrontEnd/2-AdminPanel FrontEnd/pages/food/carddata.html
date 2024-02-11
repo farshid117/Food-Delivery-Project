@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>پنل ادمین رستوران | لیست غذاها</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap4.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+
+  <!-- bootstrap rtl -->
+  <!--  <link rel="stylesheet" href="../../dist/css/bootstrap-rtl.min.css" /> -->
+  <!-- template rtl version -->
+  <link rel="stylesheet" href="../../dist/css/custom-style.css" />
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrapV5-1-3.css">
+<style>
+  .tab-pane{
+    display: none !important;;
+  }
+  .tab-pane.show{
+    display: flex !important;
+  }
+</style>
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.assign("../../login.html");
+  </script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand bg-primary  border-bottom">
+
+      <!-- SEARCH FORM -->
+      <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+          <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search" />
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav mr-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <button id="exit" onclick="logOut()" class="btn btn-danger"><i class="fa fa-fire"></i></button>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="../../index3.html" class="brand-link">
+        <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: 0.8" />
+        <span class="brand-text font-weight-light">پنل ادمین رستوران</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar" style="direction: rtl">
+        <div style="direction: rtl">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex bg-info">
+            <div class="image">
+              <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g"
+                class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block " id="resturantName" style="text-decoration: none;">...</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="/index.html" class="nav-link active">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    داشبورد
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./data.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست غذاها
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index2.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست سفارش‌ها
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index3.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست کاربران
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>لیست غذاها</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-left">
+                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                <li class="breadcrumb-item active">جداول غذاها</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+
+      <!-- todo Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!--todo /.card-header -->
+              <div class="card-header row">
+                <h3 class="card-title">جدول غذاها</h3>
+                <a class="btn btn-primary float-right mr-auto" style="color: #fff" href="/pages/food/create.html">غذای
+                  جدید</a>
+              </div>
+              <!--todo /.card-body -->
+              <div class="card-body text-white">
+                <div class="row">
+                  <div class="col-12">
+                    <!--//todo start nav-tabs-->
+                    <section class="d-flex flex-column justify-content-start">
+                      <ul class="nav nav-tabs nav-pills justify-content-start w-100" id="myTab">
+                        <li class="nav-item">
+                          <button class="nav-link active" id="allBtn" data-bs-toggle="tab"
+                            data-bs-target="#all">همه</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" id="breakfastBtn" data-bs-toggle="tab"
+                            data-bs-target="#breakfast">صبحانه</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" id="launchBtn" data-bs-toggle="tab"
+                            data-bs-target="#launch">ناهار</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" id="dinnerBtn" data-bs-toggle="tab"
+                            data-bs-target="#dinner">شام</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" id="fastfoodBtn" data-bs-toggle="tab" data-bs-target="#fastfood">فست
+                            فوت</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" id="caffeeBtn" data-bs-toggle="tab"
+                            data-bs-target="#caffee">کافه</button>
+                        </li>
+                      </ul>
+                      <!-- todo tab-contant -->
+                      <div class="tab-content w-100" id="myTabContent" style="background: #0a1045;">
+                            
+                              <div class="tab-pane d-flex flex-wrap justify-content-around card-body fade show active " id="all" style="flex:1 0 auto">
+                               
+                                  <!-- todo All foods -->
+                                
+                              
+                               
+                              </div>
+                            
+                            <div class="tab-pane d-flex flex-wrap justify-content-around card-body fade " id="breakfast" style="flex:1 0 auto" >
+                              <div class="" >
+                                <!-- todo breakfast foods -->
+                              
+                              
+                              </div>
+                            </div>
+                            <div class=" tab-pane d-flex flex-wrap justify-content-around card-body fade" id="launch" style="flex:1 0 auto" >
+                                 <!-- todo launch foods -->
+                              
+                              
+                            </div>
+                            <div class=" tab-pane d-flex flex-wrap justify-content-around card-body fade" id="dinner" style="flex:1 0 auto">
+                                <!-- todo dinner foods -->
+                              
+                              
+                           
+                            </div>
+                            <div class="tab-pane d-flex flex-wrap justify-content-around card-body fade" id="fastfood" style="flex:1 0 auto" >
+                                <!-- todo fastfood foods -->
+                              
+                              
+                            
+                            </div>
+                            <div class="tab-pane d-flex flex-wrap justify-content-around card-body fade" id="caffee" style="flex:1 0 auto">
+                                <!-- todo caffee foods -->
+                              
+                              
+                           
+                            </div>
+                      </div>
+                    </section>
+
+
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <strong>CopyLeft &copy; 2018
+        <a href="http://github.com/hesammousavi/">علیرضاخیاط‌پور</a>.</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+
+  <!-- page script -->
+
+  <script src="plugins/bootstrap/js/bootstrap.bundleV5-1-3.js"></script>
+  <!-- todo sweet-alert cdn -->
+  <script src="https://files.free-learn.ir/Tryitself/javascript/intro/files/sweetalert2.js"></script>
+  <!-- todo axios cdn -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const getListFood = () => {
+      axios
+        .get("http://localhost:3000/api/admin/getfoods", {
+          headers: { "x-auth-token": localStorage.getItem("token") },
+        })
+        .then((res) => {
+          console.log(res);
+          document.querySelector("#resturantName").innerHTML = res.data.name
+          // res is object with keys: data & header & statusCode
+          // that data's key include response of server that is array of foods object
+          const {menu} = res.data
+          console.log("#all: ", document.querySelector("#all"));
+           document.getElementById("all").innerHTML = menu.map((food, index) => 
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4 mb-3"
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+            )
+            .join(""); //todo: change array to string
+
+            document.querySelector("#breakfast").innerHTML = menu.filter(food => food.categories == "صبحانه").map((food, index) => 
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4 mb-3 "
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+
+            ).join(""); //todo: change array to string
+            document.querySelector("#launch").innerHTML = menu.filter(food => food.categories == "ناهار").map((food, index) => 
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4 mb-3 "
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+
+            ).join(""); //todo: change array to string
+            document.querySelector("#dinner").innerHTML = menu.filter(food => food.categories == "شام").map((food, index) => 
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4 mb-3"
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+
+            ).join(""); //todo: change array to 
+            document.querySelector("#fastfood").innerHTML = menu.filter(food => food.categories == "فست فود").map((food, index) => 
+            
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4"
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+
+            ).join(""); //todo: change array to string
+            document.querySelector("#caffee").innerHTML = menu.filter(food => food.categories == "کافه").map((food, index) => 
+            
+              `
+              <div
+                class="col-11 col-sm-9 col-md-5 d-flex flex-column flex-lg-row  align-items-center justify-content-around rounded-3 p-4 g-4"
+                style="background: #0d6efd;"
+              >
+
+                    <div class="row col-12 col-lg-3  ">
+                      <img src="http://localhost:3000/${food.pic}" alt="تصویر شخص" class="d-block img-fluid w-100 h-100 p-0"
+                        style="border: 1px solid #000;" />
+
+                    </div>
+                    <div class=" row col-12  col-lg-8 ">
+                      <ul class="list-group list-group-flush rounded-3 p-0">
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">نام غذا: <span class="fw-bold">${food.foodName}</span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">قیمت :
+                          <span class="fw-bold">${food.price}<span class="ms-1">تومان</span></span></li>
+                        <li class="list-group-item list-group-item-action " style="font-size: 13px;">دسته :
+                          <span class="fw-bold">${food.categories}</span></li>
+                      </ul>
+
+                    </div>
+
+                    <div class="row col-12 col-lg-1  flex-lg-column  aligin-items-center justify-content-center">
+
+                      <a href="./detailsfood.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: orange;"
+                      >
+                        <i class="fa fa-eye" style="font-size: 20px;"></i>
+                      </a>
+                      <a href="./edit.html?id=${food._id}&foodName=${food.foodName}&desc=${food.desc}&price=${food.price}&categories=${food.categories}&pic=${food.pic}"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: cyan;"
+                      >
+                        <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                      </a>
+                      <button onClick="deleteFood('${food._id}')"
+                        class="btn m-1 px-3 d-inline-flex align-items-center justify-content-center w-25 "
+                        style="background: red;"
+                      >
+                        <i class="fa fa-trash" style="font-size: 20px;"></i>
+                      </button>
+
+                    </div>
+
+              </div>
+
+              `
+
+            ).join(""); //todo: change array to string
+
+           
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getListFood();
+
+    //todo: deleteFood Handler
+    const deleteFood = (foodId) => {
+       console.log("foodId: ", foodId);
+      let result = confirm(
+        "ادمین جان مطمئنی که این غذا را میخوای حذف کنی؟"
+      );
+      if (result) {
+       
+        axios.delete(`http://localhost:3000/api/admin/deletefood/${foodId}`,
+            {
+              headers: {
+                "x-auth-token": localStorage.getItem("token"),
+              },
+            }
+          )
+          .then((res) => {
+            swal.fire("ادمین جان: غذای مورد نظر حذف گردید :-)")
+            getListFood();
+          })
+          .catch((err) => console.log(err.response.data.message));
+      }
+    };
+    //todo: editFood Handler
+    const editFood = (url) => {
+      console.log(url)
+      window.location.assign(url)
+
+    }
+    //todo: logout Handler
+    const logOut = () => {
+      localStorage.clear()
+      window.location.assign("../../login.html")
+    }
+  </script>
+</body>
+
+</html>

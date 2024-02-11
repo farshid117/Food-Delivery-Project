@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>پنل ادمین رستوران | لیست غذاها</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap4.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+
+  <!-- bootstrap rtl -->
+  <link rel="stylesheet" href="../../dist/css/bootstrap-rtl.min.css" />
+  <!-- template rtl version -->
+  <link rel="stylesheet" href="../../dist/css/custom-style.css" />
+  <!--  <script>
+      const token = localStorage.getItem("token");
+      if (!token) window.location.assign("../../login.html");
+    </script> -->
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand bg-primary  border-bottom">
+
+      <!-- SEARCH FORM -->
+      <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+          <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search" />
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav mr-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <button id="exit" onclick="logOut()" class="btn btn-danger"><i class="fa fa-fire"></i></button>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="../../index3.html" class="brand-link">
+        <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: 0.8" />
+        <span class="brand-text font-weight-light">پنل ادمین رستوران</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar" style="direction: rtl">
+        <div style="direction: rtl">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex bg-info">
+            <div class="image">
+              <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g"
+                class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block " id="resturantName">...</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="/index.html" class="nav-link active">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    داشبورد
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./data.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست غذاها
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index2.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست سفارش‌ها
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index3.html" class="nav-link">
+                  <i class="nav-icon fa fa-dashboard"></i>
+                  <p>
+                    لیست کاربران
+                    <!-- <i class="right fa fa-angle-left"></i> -->
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>لیست غذاها</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-left">
+                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                <li class="breadcrumb-item active">جداول غذاها</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header row">
+                <h3 class="card-title">جدول غذاها</h3>
+                <button class="btn btn-primary float-right mr-auto">
+                  <a style="color: unset" href="/pages/food/create.html">غذای جدید</a>
+                </button>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table  table-hover ">
+                  <thead>
+                    <tr>
+                      <th class="table-primary">شماره غذا</th>
+                      <th class="table-secondary">نام غذا</th>
+                      <th class="table-success">توضیحات</th>
+                      <th class="table-danger">قیمت</th>
+                      <th class="table-primary">دسته بندی</th>
+                      <th class="table-info">امتیاز</th>
+                      <th class="table-warning">ویرایش/حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <strong>CopyLeft &copy; 2018
+        <a href="http://github.com/hesammousavi/">علیرضاخیاط‌پور</a>.</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables -->
+  <script src="../../plugins/datatables/jquery.dataTables.js"></script>
+  <script src="../../plugins/datatables/dataTables.bootstrap4.js"></script>
+  <!-- SlimScroll -->
+  <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="../../plugins/fastclick/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../../dist/js/demo.js"></script>
+  <!-- page script -->
+  <!-- todo sweet-alert cdn -->
+  <script src="https://files.free-learn.ir/Tryitself/javascript/intro/files/sweetalert2.js"></script>
+  <!-- todo axios cdn -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const getListFood = () => {
+      axios.get("http://localhost:3000/api/admin/getfoods", {
+        headers: { "x-auth-token": localStorage.getItem("token") },
+      })
+        .then((res) => {
+          console.log(res);
+          var resturantName = res.data.name
+          document.querySelector("#resturantName").innerHTML = resturantName
+          // res is object with keys: data & header & statusCode
+          // that data's key include response of server that is array of resturants object
+          document.querySelector("tbody").innerHTML = res.data.menu
+            .map(
+              (item, index) => `
+                <tr>
+                  <td>${index + 1}</td>  
+                  <td>${item.foodName}</td>  
+                  <td>${item.desc}</td>  
+                  <td>${item.price}</td>  
+                  <td>${item.categories}</td>  
+                  <td>${item.score}</td> 
+                  <td class="d-flex">
+                    <button style="cursor: pointer;" onclick="editFood('./edit.html?id=${item._id}&foodName=${item.foodName}&desc=${item.desc}&price=${item.price}&categories=${item.categories}')" class="btn-sm btn-primary ml-1">ویرایش</button> 
+                    <button style="cursor: pointer;"  "id="delBtn"  class="btn-sm btn-danger" onclick="deleteFood('${item._id}')">حذف</button>
+                  </td>
+                </tr>
+            `
+            )
+            .join(""); //todo: change array to string
+        })
+        .catch((err) => {
+          swal.fire(err.response.data.message)
+          console.log(err);
+        });
+    };
+    getListFood();
+    //todo: deleteFood Handler method
+    const deleteFood = (foodId) => {
+      let result = confirm(
+        "ادمین جان مطمئنی که این غذا را میخوای حذف کنی؟"
+      );
+      if (result) {
+        console.log("foodId: ", foodId);
+        axios
+          .delete(
+            `http://localhost:3000/api/resturant/food/deleteFood/${foodId}`,
+            {
+              headers: {
+                "x-auth-token": localStorage.getItem("token"),
+              },
+            }
+          )
+          .then((res) => {
+            getListFood();
+          })
+          .catch((err) => console.log(err.message));
+      }
+    };
+    //todo: editFood Handler method
+    const editFood = (url) => {
+      console.log(url)
+      window.location.assign(url)
+
+    }
+    //todo: logOut Handler method
+    const logOut = () => {
+      localStorage.clear()
+      window.location.assign("../../login.html")
+    }
+  </script>
+</body>
+
+</html>

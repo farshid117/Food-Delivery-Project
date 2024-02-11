@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ورود به‌ پنل ادمین رستوران</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
+	<link rel="stylesheet" href="/dist/css/custom-style.css">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: Vazir ,sans-serif;
+			height: 100vh;
+			background: #0a1045;
+		}
+		*{
+			font-family: inherit;
+		}
+		
+	</style>
+</head>
+<body>
+
+<div class="row justify-content-center" style="border-radius: 10px;">
+	<div class="col-12">
+		<div class="card w-100 " style="height: 400px;border-radius: 10px;">
+			<div class="card-header text-dark text-center bg-primary">
+				<p class="h5 py-3">ورود به پنل ادمین رستوران</p>
+			</div>
+			<div class="card-body my-2 ">
+				<div class="row align-items-center justify-content-center flex-row-reverse">
+
+					<div class="col-md-12">
+						<input type="text" id="adminUsername" class="form-control text-muted font-weight-bold" placeholder="شماره موبایل را وارد کنید"
+							style="direction: rtl; font-size: 13px;">
+						<input type="text" id="adminPass" class="form-control text-muted mt-2 font-weight-bold" placeholder="پسورد را وارد کنید"
+							style="direction: rtl; font-size: 13px;">
+					</div>
+					<div class="col-md-12 p-0 d-flex justify-content-center mt-3">
+						<input type="submit" class="btn btn-primary btn-sm px-3 " value="ورود" onclick="onSubmit()">
+					</div>
+					<div class="col-12 text-right mt-5" style="font-size: 14px;">
+						<a href="#" class="d-inline-block btn btn-warning btn-sm ">ارسال مجدد کد</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+		const onSubmit = () =>{
+			try {
+				const adminUsername = document.querySelector("#adminUsername").value;
+				const adminPass = document.querySelector("#adminPass").value;
+
+				if(!adminUsername || !adminPass){
+				    return	alert("پرکردن تمام فیلدها الزامیست")
+					
+				}
+				axios.post("http://localhost:3000/api/admin/login",{adminUsername,adminPass}) //1-ES6  2-adminUsername is adminMobile in DB
+					.then(res=>{
+							console.log(res) //response of keavenagar is put  in send() in server`
+							location.assign(`./loginverifycode.html?adminMobile=${adminUsername}`)//adminUsername is adminMobile in DB
+
+					}).catch(err=>{
+						console.log(err);
+						alert(err.response.data.message); //server side should be written like this res.send({message:"text")})
+					})
+			} catch (err) {
+				console.log(err)
+			} 
+		}
+
+		</script>
+	</body>
+</html>
