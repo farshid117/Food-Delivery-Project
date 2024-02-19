@@ -1,1 +1,165 @@
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir.eot");
+  src: url("../fonts/Vazir.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir.woff2") format("woff2"), url("../fonts/Vazir.woff") format("woff"), url("../fonts/Vazir.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir-Bold.eot");
+  src: url("../fonts/Vazir-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir-Bold.woff2") format("woff2"), url("../fonts/Vazir-Bold.woff") format("woff"), url("../fonts/Vazir-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir-Thin.eot");
+  src: url("../fonts/Vazir-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir-Thin.woff2") format("woff2"), url("../fonts/Vazir-Thin.woff") format("woff"), url("../fonts/Vazir-Thin.ttf") format("truetype");
+  font-weight: 100;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir-Light.eot");
+  src: url("../fonts/Vazir-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir-Light.woff2") format("woff2"), url("../fonts/Vazir-Light.woff") format("woff"), url("../fonts/Vazir-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir-Medium.eot");
+  src: url("../fonts/Vazir-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir-Medium.woff2") format("woff2"), url("../fonts/Vazir-Medium.woff") format("woff"), url("../fonts/Vazir-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir-Black.eot");
+  src: url("../fonts/Vazir-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Vazir-Black.woff2") format("woff2"), url("../fonts/Vazir-Black.woff") format("woff"), url("../fonts/Vazir-Black.ttf") format("truetype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Booter";
+  src: url("components/Shop/Fonts/Booter-ZeroZero.woff") format("woff"), url("components/Shop/Fonts/Booter-ZeroZero.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --hue: 227;
+  --sat: 47%;
+  --primary-color: hsl(var(--hue), var(--sat), 52%);
+  --primary-color-light: hsl(var(--hue), var(--sat), 85%);
+  --primary-color-lighten: hsl(var(--hue), var(--sat), 80%);
+  --secondary-color: hsl(var(--hue), var(--sat), 53%);
+  --title-color: hsl(var(--hue), 4%, 15%);
+  --text-color: hsl(var(--hue), 4%, 35%);
+  --text-color-light: hsl(var(--hue), 4%, 65%);
+  --body-color: hsl(var(--hue), 0%, 100%);
+  --container-color: #fff;
+  --ff-primary: "Vazir", sans-serif;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ff-primary);
+  background: var(--body-color);
+  line-height: 2;
+  font-size: 1rem;
+  text-align: right;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--title-color);
+  line-height: 2;
+}
+
+p {
+  color: var(--text-color);
+  line-height: 2;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 0.875rem;
+}
+
+/* Main Layout styles */
+.container {
+  width: 90vw !important;
+  margin: 0px auto !important;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding: 4rem 0 1rem 0;
+}
+.section__title, .section__title_center {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  margin-bottom: 1rem;
+}
+.section__title_center {
+  text-align: center;
+}
+.section__title span, .section__title_center span {
+  color: var(--primary-color);
+}
+
+.svg__img {
+  width: 300px;
+  justify-self: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
