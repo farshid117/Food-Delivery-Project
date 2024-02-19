@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/farshid117/ReadyBootstrapTemplate.git"
+    "url": "git+https://github.com/farshid117/Food-Delivery-Project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/farshid117/ReadyBootstrapTemplate/issues"
+    "url": "https://github.com/farshid117/Food-Delivery-Project/issues"
   },
-  "homepage": "https://github.com/farshid117/ReadyBootstrapTemplate#readme",
+  "homepage": "https://github.com/farshid117/Food-Delivery-Project#readme",
   "dependencies": {
     "sass": "^1.69.5"
   }
