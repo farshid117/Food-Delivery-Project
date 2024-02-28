@@ -4,26 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-    <meta name="keywords"    content="کلمات کلیدی پروژه برای بالابردن سئو" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="کلمات کلیدی پروژه برای بالابردن سئو" />
     <meta name="description" content="توضیحی از پروژه" />
-    <meta name="outher"      content="مهندس علیرضا خیاطپور" />
+    <meta name="outher" content="مهندس علیرضا خیاطپور" />
 
     <link rel="icon" href="img/logo3.png" type="image/png">
     <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="./css/fontawesome5-15-4.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/style.css">
-    
+
     <title>سامانه تحویل غذا | داشبورد</title>
 
 </head>
 
 <body>
+    <section class="header" id="header">
+        <nav class="nav">
+            <a href="#home" class="nav__logo"><span>AliCoder</span><span>.ir</span></a>
 
-    <div class=" container-fluid container-lg text-center mt-5">
-        <div class="btn btn-primary">Test Bootstrap</div>
-    </div>
+            <div class="nav__menu">
+                <ul class="nav__list">
+                    <li class="nav__item" onclick="addActiveLink(0)">
+                        <a href="#home" class="nav__item_link"> داشبورد </a>
+                    </li>
+                    <li class="nav__item" onclick="addActiveLink(1)">
+                        <a href="#️about" class="nav__item_link ">لیست رستوران‌ها</a>
+                    </li>
+                    <li class="nav__item" onclick="addActiveLink(2)">
+                        <a href="#services" class="nav__item_link ">لیست سفارش‌ها</a>
+                    </li>
+                    <li class="nav__item" onclick="addActiveLink(3)">
+                        <a href="#contact" class="nav__item_link">لیست مشتریان</a>
+                    </li>
+                    <li>
+                        <i class="bi bi-toggle-off nav__item_toggle" style="font-size:30px;"></i>
+                    </li>
+                </ul>
+            </div>
 
+            <div class="nav__toggle">
+                <i class="bi bi-list-nested"></i>
+            </div>
+        </nav>
+    </section>
 
 
 

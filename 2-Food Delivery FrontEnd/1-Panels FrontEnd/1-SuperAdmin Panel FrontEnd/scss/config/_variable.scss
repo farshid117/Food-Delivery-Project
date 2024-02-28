@@ -68,21 +68,18 @@
     font-style: normal;
 }
 :root {
-    // 227, 47%, 52%
-    // 179, 70%, 45%
+    
 
-    --hue: 227;
-    --sat: 47%;
+    --primary-color: #01286D;
+    --primary-color-light: #013083
+    --primary-color-lighten: #113983
+    --secondary-color: #00b83b
 
-    --primary-color: hsl(var(--hue), var(--sat), 52%);
-    --primary-color-light: hsl(var(--hue), var(--sat), 85%);
-    --primary-color-lighten: hsl(var(--hue), var(--sat), 80%);
-    --secondary-color: hsl(var(--hue), var(--sat), 53%);
-
-    --title-color: hsl(var(--hue), 4%, 15%);
-    --text-color: hsl(var(--hue), 4%, 35%);
-    --text-color-light: hsl(var(--hue), 4%, 65%);
-    --body-color: hsl(var(--hue), 0%, 100%);
-    --container-color: #fff;
+    --title-color: #222222
+    --text-color: #c2caca
+    --text-color-light: #
+    --body-color: #
+    --container-color: #f3f3f3;
+    --body-color: #ffff;
     --ff-primary: "Vazir", sans-serif;
 }

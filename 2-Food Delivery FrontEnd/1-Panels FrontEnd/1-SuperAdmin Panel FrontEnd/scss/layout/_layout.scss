@@ -1,34 +1,44 @@
 /* Main Layout styles */
+body {
+  background: #01286d;
+  
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: var(--body-color) !important;
+  min-height: 100vh;
+}
 .container {
   width: 90vw !important;
   margin: 0px auto !important;
   display: grid;
   gap: 1.5rem;
 }
-.section{
+.section {
   padding: 4rem 0 1rem 0;
 
-  &__title{
+  &__title {
     font-size: 1.25rem;
     color: var(--title-color);
     margin-bottom: 1rem;
 
-    &_center{
+    &_center {
       @extend .section__title;
       text-align: center;
     }
 
-    span{
+    span {
       color: var(--primary-color);
     }
   }
 }
-.svg__img{
-    width: 300px;
-    justify-self: center;
+.svg__img {
+  width: 300px;
+  justify-self: center;
 }
 
-.bold{
+.bold {
   font-weight: bold;
 }
-  
+a {
+  color: var(--text-color);
+}
